@@ -6,21 +6,15 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
 const CreateFormModal = (props) => {
 	const [ showTextArea, setShowTextArea ] = useState(false)
+	const [questions, setQuestions] = useState([])
 	const [ formData, setFormData ] = useState({
-		question: '',
+		questionTitle: '',
 		answerType: 1,
 		options: ""
 	})
 
-	const changeHandler = e => {
-		setFormData({...formData, [e.target.name]: e.target.value})
-	}
+	const { questionTitle, answerType, options } = formData
 
-	const submitHandler = e => {
-		e.preventDefault()
-	}
-
-	const { question, answerType, options } = formData
 	
 	useEffect(() => {
 		// Dropdown values 1. Text, 2. Multi choice 3. Single choice
@@ -29,12 +23,37 @@ const CreateFormModal = (props) => {
 			setShowTextArea(true) :
 		setShowTextArea(false)
 	}, [ answerType ])
-	
+
+	const changeHandler = e => {
+		setFormData({...formData, [e.target.name]: e.target.value})
+	}
+
+	const submitHandler = e => {
+		e.preventDefault()
+		console.log(questions);
+
+	}
+
+	// Add a question to questions state and clear previous user inputs
+	const addQuestion = e => {
+		e.preventDefault()
+		const listOfQuestions = [ ...questions ]
+		listOfQuestions.push({ formData })
+		setQuestions(listOfQuestions)
+		setFormData({
+		questionTitle: '',
+		answerType: 1,
+		options: ""
+		})
+		console.log(questions);
+	}
+
 
 	return (
 		<Modal
 			{ ...props }
 			size="lg"
+			backdrop="static"
 			aria-labelledby="contained-modal"
 			centered>
 			
@@ -47,7 +66,7 @@ const CreateFormModal = (props) => {
 				<FloatingLabel controlId="floatingInput"
 					label="Type your Question/Title here"
 					className="mb-3">
-					<Form.Control type="text" name="question" size="lg" placeholder="Type your Question/Title here" value={ question } onChange={ changeHandler }/>
+					<Form.Control type="text" name="questionTitle" size="lg" placeholder="Type your Question/Title here" value={ questionTitle } onChange={ changeHandler }/>
 				</FloatingLabel>
 				
 				{/* Input: Answer type */}
@@ -71,7 +90,7 @@ const CreateFormModal = (props) => {
 			
 			<Modal.Footer>
 				<Button variant="success" onClick={submitHandler}>Publish Form</Button>
-        <Button variant="outline-primary">Add Question</Button>
+        <Button variant="outline-primary" onClick={addQuestion}>Add Question</Button>
       </Modal.Footer>
 		
 		</Modal>
