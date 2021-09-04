@@ -1,10 +1,13 @@
 import React from 'react'
+import Home from './components/Home/Home'
+import Container from 'react-bootstrap/Container'
 
 const App = () => {
   return (
-    <div>
+    <Container>
       hello world
-    </div>
+      <Home/>
+    </Container>
   )
 }
 
