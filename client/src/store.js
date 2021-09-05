@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer from './reducers'
 
 const initialState = {}
 
@@ -11,3 +12,5 @@ const store = createStore(
 	initialState,
 	composeWithDevTools(applyMiddleware(...middleWare))
 )
+
+export default store
