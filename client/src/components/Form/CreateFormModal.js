@@ -6,6 +6,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { useDispatch } from 'react-redux'
 import { LOAD_LIST_OF_FORMS } from '../../utils/types'
 import { v4 as uuidv4 } from 'uuid';
+import ListGroup from 'react-bootstrap/ListGroup'
+import {getAnswerTypeName} from "../../utils/utils"
 
 const CreateFormModal = (props) => {
 	const [ showTextArea, setShowTextArea ] = useState(false)
@@ -37,6 +39,7 @@ const CreateFormModal = (props) => {
 		const listOfQuestions = [ ...questions ]
 		listOfQuestions.push({ ...formData, options : options?.split("\n") })
 		setQuestions(listOfQuestions)
+		console.log(options);
 		setFormData({
 		questionTitle: '',
 		answerType: 1,
@@ -111,13 +114,24 @@ const CreateFormModal = (props) => {
 					<Form.Control as="textarea" name="options" style={ { height: '100px' } } value={ options } onChange={ changeHandler }/>
 				</FloatingLabel>}
 			
+				
 			</Modal.Body>
 			
 			<Modal.Footer>
 				<Button variant="success" onClick={submitHandler}>Publish Form</Button>
         <Button variant="outline-primary" onClick={addQuestion}>Add Question</Button>
-      </Modal.Footer>
-		
+			</Modal.Footer>
+			
+			{/* Render all previously added question for current form */ }
+					<ListGroup >
+				{questions?.map(question =>
+						<ListGroup.Item >
+							<p className="mb-0"> { question.questionTitle } </p>
+						<p className="mb-0"> { getAnswerTypeName(question.answerType) }</p>
+						<p> {question?.options.toString()}</p>
+						</ListGroup.Item>
+				) }
+				</ListGroup>
 		</Modal>
 	)
 }
