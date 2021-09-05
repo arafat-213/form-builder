@@ -28,7 +28,7 @@ const SingleForm = () => {
 	// TODO: render form from currentForm
 	return (
 		<Form>
-			<h4>NAME OF THE FORM</h4>
+			<h4>{currentForm?.formName}</h4>
 			{/* User name and email - display on every form*/}
 			<Fragment>
 				<FloatingLabel
