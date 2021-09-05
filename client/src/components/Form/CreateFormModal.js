@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import { useDispatch } from 'react-redux'
+import { LOAD_LIST_OF_FORMS } from '../../utils/types'
 
 const CreateFormModal = (props) => {
 	const [ showTextArea, setShowTextArea ] = useState(false)
@@ -15,7 +17,7 @@ const CreateFormModal = (props) => {
 
 	const { questionTitle, answerType, options } = formData
 
-	
+	const dispatch = useDispatch()
 	useEffect(() => {
 		// Dropdown values 1. Text, 2. Multi choice 3. Single choice
 		// Show text are only when 2 OR 3
@@ -32,7 +34,7 @@ const CreateFormModal = (props) => {
 	const addQuestion = e => {
 		e.preventDefault()
 		const listOfQuestions = [ ...questions ]
-		listOfQuestions.push({ ...formData })
+		listOfQuestions.push({ ...formData, options : options?.split("\n") })
 		setQuestions(listOfQuestions)
 		setFormData({
 		questionTitle: '',
@@ -57,6 +59,12 @@ const CreateFormModal = (props) => {
 		}
 		listForms.push(newForm)
 		localStorage.setItem("forms", JSON.stringify(listForms))
+		
+		// Load latest list of forms on redux store
+		dispatch({
+			type: LOAD_LIST_OF_FORMS,
+			payload: listForms
+		})
 
 		// Clear questions state
 		setQuestions([])
