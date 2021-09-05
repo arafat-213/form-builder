@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { useDispatch } from 'react-redux'
 import { LOAD_LIST_OF_FORMS } from '../../utils/types'
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateFormModal = (props) => {
 	const [ showTextArea, setShowTextArea ] = useState(false)
@@ -53,7 +54,7 @@ const CreateFormModal = (props) => {
 		// Get list of forms from localStorage and add current form
 		let listForms = JSON.parse(localStorage.getItem("forms")) || []
 		const newForm = {
-			_id: Math.random(),
+			_id: uuidv4(),
 			questions: [ ...questions ],
 			createdAt: Date.now()
 		}
