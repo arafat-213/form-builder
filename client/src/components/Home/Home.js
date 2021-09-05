@@ -71,24 +71,25 @@ const Home = () => {
 						<td>Form URL</td>
 						<td>Created At</td>
 					</thead>
-
-					{availableForms?.map(form => (
-						<tr>
-							<td>{form?.formName}</td>
-							<td>
-								<Link
-									key={form._id + '\n'}
-									to={`/form/${form._id}`}>
-									{APP_URL + form._id}
-								</Link>
-							</td>
-							<td>
-								{new Date(form.createdAt).toLocaleString(
-									'en-IN'
-								)}
-							</td>
-						</tr>
-					))}
+					<tbody>
+						{availableForms?.map(form => (
+							<tr>
+								<td>{form?.formName}</td>
+								<td>
+									<Link
+										key={form._id + '\n'}
+										to={`/form/${form._id}`}>
+										{APP_URL + form._id}
+									</Link>
+								</td>
+								<td>
+									{new Date(form.createdAt).toLocaleString(
+										'en-IN'
+									)}
+								</td>
+							</tr>
+						))}
+					</tbody>
 				</Table>
 			) : (
 				<h2>

@@ -12,9 +12,9 @@ const SingleForm = () => {
 	const [currentForm, setCurrentForm] = useState({})
 	const [formData, setFormData] = useState({
 		name: '',
-		email: '',
-		response: {}
+		email: ''
 	})
+	const { name, email } = formData
 	const { formId } = useParams()
 	const history = useHistory()
 
@@ -25,7 +25,10 @@ const SingleForm = () => {
 		setCurrentForm({ ...form })
 	}, [formId])
 
-	// TODO: render form from currentForm
+	const changeHandler = e => {
+		setFormData({ ...formData, [e.target.name]: e.target.value })
+	}
+
 	return (
 		<Form>
 			<h4>{currentForm?.formName}</h4>
@@ -38,12 +41,18 @@ const SingleForm = () => {
 					<Form.Control
 						type='email'
 						required
+						name='email'
+						value={email}
+						onChange={changeHandler}
 						placeholder='Enter your email address'
 					/>
 				</FloatingLabel>
 				<FloatingLabel controlId='floatingName' label='Name'>
 					<Form.Control
 						type='text'
+						value={name}
+						name='name'
+						onChange={changeHandler}
 						placeholder='Enter your name here'
 						className='mb-3'
 					/>
