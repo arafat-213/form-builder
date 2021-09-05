@@ -64,29 +64,38 @@ const Home = () => {
 					formName={formName}
 				/>
 			</Form>
-			<Table striped bordered hover>
-				<thead>
-					<td>Form Name</td>
-					<td>Form URL</td>
-					<td>Created At</td>
-				</thead>
+			{availableForms.length > 0 ? (
+				<Table striped bordered hover>
+					<thead>
+						<td>Form Name</td>
+						<td>Form URL</td>
+						<td>Created At</td>
+					</thead>
 
-				{availableForms?.map(form => (
-					<tr>
-						<td>{form?.formName}</td>
-						<td>
-							<Link
-								key={form._id + '\n'}
-								to={`/form/${form._id}`}>
-								{APP_URL + form._id}
-							</Link>
-						</td>
-						<td>
-							{new Date(form.createdAt).toLocaleString('en-IN')}
-						</td>
-					</tr>
-				))}
-			</Table>
+					{availableForms?.map(form => (
+						<tr>
+							<td>{form?.formName}</td>
+							<td>
+								<Link
+									key={form._id + '\n'}
+									to={`/form/${form._id}`}>
+									{APP_URL + form._id}
+								</Link>
+							</td>
+							<td>
+								{new Date(form.createdAt).toLocaleString(
+									'en-IN'
+								)}
+							</td>
+						</tr>
+					))}
+				</Table>
+			) : (
+				<h2>
+					Oops...Looks like empty here. Start creating a form by
+					clicking on Create a new form button above!!
+				</h2>
+			)}
 		</Fragment>
 	)
 }
