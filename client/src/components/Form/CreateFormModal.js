@@ -47,6 +47,14 @@ const CreateFormModal = props => {
 		})
 	}
 
+	const removeQuestion = questionTitle => {
+		const listOfQuestions = [...questions]
+		const newList = listOfQuestions.filter(
+			question => question.questionTitle !== questionTitle
+		)
+		setQuestions(newList)
+	}
+
 	const submitHandler = e => {
 		e.preventDefault()
 		// If last question is not added on questions state, add it
@@ -152,14 +160,25 @@ const CreateFormModal = props => {
 
 				{/* Render all previously added question for current form */}
 				<ListGroup>
-					{questions?.map(question => (
-						<ListGroup.Item>
+					{questions?.map((question, index) => (
+						<ListGroup.Item key={index}>
 							<p className='mb-0'> {question.questionTitle} </p>
 							<p className='mb-0'>
 								{' '}
 								{getAnswerTypeName(question.answerType)}
 							</p>
-							<p> {question?.options.toString()}</p>
+							<p className='mb-0'>
+								{' '}
+								{question?.options.toString()}
+							</p>
+							<i
+								className='text-muted text-underline'
+								onClick={e =>
+									removeQuestion(question?.questionTitle)
+								}
+								style={{ cursor: 'pointer' }}>
+								Remove
+							</i>
 						</ListGroup.Item>
 					))}
 				</ListGroup>
