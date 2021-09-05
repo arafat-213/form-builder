@@ -28,26 +28,42 @@ const CreateFormModal = (props) => {
 		setFormData({...formData, [e.target.name]: e.target.value})
 	}
 
-	const submitHandler = e => {
-		e.preventDefault()
-		console.log(questions);
-
-	}
-
 	// Add a question to questions state and clear previous user inputs
 	const addQuestion = e => {
 		e.preventDefault()
 		const listOfQuestions = [ ...questions ]
-		listOfQuestions.push({ formData })
+		listOfQuestions.push({ ...formData })
 		setQuestions(listOfQuestions)
 		setFormData({
 		questionTitle: '',
 		answerType: 1,
 		options: ""
 		})
-		console.log(questions);
 	}
 
+	const submitHandler = e => {
+		e.preventDefault()
+		// If last question is not added on questions state, add it
+		// usecase when user clicks on Publish form without adding the latest question by clicking on add question button
+		if (questionTitle !== "")
+			addQuestion(e)
+		
+		// Get list of forms from localStorage and add current form
+		let listForms = JSON.parse(localStorage.getItem("forms")) || []
+		const newForm = {
+			_id: Math.random(),
+			questions: [ ...questions ],
+			createdAt: Date.now()
+		}
+		listForms.push(newForm)
+		localStorage.setItem("forms", JSON.stringify(listForms))
+
+		// Clear questions state
+		setQuestions([])
+
+		// Hide the Modal once form is published
+		props.onHide()
+	}
 
 	return (
 		<Modal
