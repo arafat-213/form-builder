@@ -1,12 +1,16 @@
+// React
 import React, { useEffect, useState } from 'react'
+// Redux
+import { useDispatch } from 'react-redux'
+// Bootstrap
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import { useDispatch } from 'react-redux'
+import ListGroup from 'react-bootstrap/ListGroup'
+// Utils
 import { LOAD_LIST_OF_FORMS } from '../../utils/types'
 import { v4 as uuidv4 } from 'uuid'
-import ListGroup from 'react-bootstrap/ListGroup'
 import { getAnswerTypeName } from '../../utils/utils'
 
 const CreateFormModal = props => {

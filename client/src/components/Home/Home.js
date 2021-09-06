@@ -1,14 +1,19 @@
+// React
 import React, { Fragment, useState, useEffect } from 'react'
-import Button from 'react-bootstrap/Button'
-import CreateFormModal from '../Form/CreateFormModal'
-import { useSelector, useDispatch } from 'react-redux'
-import { LOAD_LIST_OF_FORMS } from '../../utils/types'
 import { Link } from 'react-router-dom'
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+// Components
+import CreateFormModal from '../Form/CreateFormModal'
+// Bootstrap
+import Button from 'react-bootstrap/Button'
 import FloatingLabel from 'react-bootstrap/esm/FloatingLabel'
 import Form from 'react-bootstrap/esm/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table'
+// Utils
+import { LOAD_LIST_OF_FORMS } from '../../utils/types'
 import { APP_URL } from '../../utils/types'
 
 const Home = () => {
