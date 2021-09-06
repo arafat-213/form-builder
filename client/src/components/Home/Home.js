@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/esm/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table'
-import { APP_URL } from '../../utils/types'
+import { getForms } from '../../actions/form.action'
 
 const Home = () => {
 	const [createFormModalShow, setCreateFormModalShow] = useState(false)
@@ -22,11 +22,13 @@ const Home = () => {
 		setFormName(e.target.value)
 	}
 
+	const APP_URL = process.env.REACT_APP_URL || 'http://localhost:3000/'
 	// Loads list of forms from localStorage
 	// TODO: replace it with useMemo
 	useEffect(() => {
-		const forms = JSON.parse(localStorage.getItem('forms'))
-		forms && dispatch({ type: LOAD_LIST_OF_FORMS, payload: [...forms] })
+		// const forms = JSON.parse(localStorage.getItem('forms'))
+		// forms && dispatch({ type: LOAD_LIST_OF_FORMS, payload: [...forms] })
+		dispatch(getForms())
 	}, [])
 	return (
 		<Fragment>
