@@ -1,10 +1,13 @@
+// React
 import React, { useEffect, useState, Fragment } from 'react'
+import { useHistory } from 'react-router-dom'
+// Redux
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+// Bootstrap
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { useHistory } from 'react-router-dom'
 
 const SingleForm = () => {
 	const availableForms = useSelector(state => state.forms.availableForms)

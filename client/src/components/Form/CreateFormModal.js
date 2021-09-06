@@ -1,15 +1,17 @@
+// React
 import React, { useEffect, useState } from 'react'
+// Redux
+import { useDispatch } from 'react-redux'
+import { createForm } from '../../actions/form.action'
+import { getForms } from '../../actions/form.action'
+// Bootstrap
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import { useDispatch } from 'react-redux'
-import { LOAD_LIST_OF_FORMS } from '../../utils/types'
-import { v4 as uuidv4 } from 'uuid'
 import ListGroup from 'react-bootstrap/ListGroup'
+// Utils
 import { getAnswerTypeName } from '../../utils/utils'
-import { createForm } from '../../actions/form.action'
-import { getForms } from '../../actions/form.action'
 
 const CreateFormModal = props => {
 	const [showTextArea, setShowTextArea] = useState(false)
@@ -63,24 +65,15 @@ const CreateFormModal = props => {
 		// usecase when user clicks on Publish form without adding the latest question by clicking on add question button
 		if (questionTitle !== '') addQuestion(e)
 
-		// // Get list of forms from localStorage and add current form
-		// let listForms = JSON.parse(localStorage.getItem('forms')) || []
 		const newForm = {
 			formName: props.formName || 'Untitled form',
 			questions: [...questions]
 		}
-		// console.log(newForm)
-		// listForms.push(newForm)
-		// localStorage.setItem('forms', JSON.stringify(listForms))
 
-		// // Load latest list of forms on redux store
-		// dispatch({
-		// 	type: LOAD_LIST_OF_FORMS,
-		// 	payload: listForms
-		// })
-
+		// Create a new form
 		dispatch(createForm(newForm))
 
+		// update the list of form once a new form is created
 		dispatch(getForms())
 
 		// Clear questions state
