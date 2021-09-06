@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
+const connectDB = require('./config/db')
 const formRouter = require('./routes/form.route')
 
 require('dotenv').config({
@@ -18,18 +18,6 @@ if (process.env.NODE_ENV === 'development')
 app.use(bodyParser.json())
 
 // connect the database
-const connectDB = async () => {
-	try {
-		await mongoose.connect(process.env.MONGO_URL, {
-			useNewUrlParser: true
-		})
-		console.log('DB connected')
-	} catch (error) {
-		console.log(error)
-		process.exit(1)
-	}
-}
-
 connectDB()
 
 // use form routes
