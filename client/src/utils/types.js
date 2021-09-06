@@ -1,2 +1,3 @@
 export const LOAD_LIST_OF_FORMS = 'LOAD_LIST_OF_FORMS'
-export const APP_URL = 'localhost:3000/'
+export const CREATE_FORM = 'CREATE_FORM'
+export const FORM_ERROR = 'FORM_ERROR'
