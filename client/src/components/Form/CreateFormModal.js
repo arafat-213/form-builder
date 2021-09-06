@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react'
 // Redux
 import { useDispatch } from 'react-redux'
-import { createForm } from '../../actions/form.action'
-import { getForms } from '../../actions/form.action'
+import { createForm, getForms } from '../../actions/form.action'
 // Bootstrap
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
